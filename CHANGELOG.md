@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/fleet-cd/fleet-ui/compare/v1.0.0...v1.0.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* fix version ([c5c9f48](https://github.com/fleet-cd/fleet-ui/commit/c5c9f48f5ac5219b984858a3946163e15e501b98))
+
 ## 0.2.0 (2022-07-12)
 
 
