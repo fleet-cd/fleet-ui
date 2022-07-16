@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/fleet-cd/fleet-ui/compare/v0.2.1...v0.3.0) (2022-07-16)
+
+
+### Features
+
+* improve login style ([ae2e9c1](https://github.com/fleet-cd/fleet-ui/commit/ae2e9c1e06381911e04544974003db0f558e4d04))
+* initial implementation ([366d40b](https://github.com/fleet-cd/fleet-ui/commit/366d40b59a85c23c04050fc2709c57e5d0f5efea))
+
 ## [0.2.1](https://github.com/fleet-cd/fleet-ui/compare/v0.2.0...v0.2.1) (2022-07-12)
 
 
