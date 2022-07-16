@@ -43,6 +43,23 @@
         @extend .baseInputText;
         box-shadow: 0 0 0 1px variables.$danger-1 inset;
     }
+
+    .inputText.#{$name}.contained {
+        @extend .baseInputText;
+        box-shadow: 0 0 0 1px variables.$card-color inset;
+    }
+    .inputText.#{$name}.contained:hover {
+        @extend .baseInputText;
+        box-shadow: 0 0 0 1px map.get($config, "primary") inset;
+    }
+    .inputText.#{$name}.contained:focus {
+        @extend .baseInputText;
+        box-shadow: 0 0 0 1px map.get($config, "primary") inset;
+    }
+    .inputText.#{$name}.contained.error {
+        @extend .baseInputText;
+        box-shadow: 0 0 0 1px variables.$danger-1 inset;
+    }
 }
 
 .errorText {

@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { InputText } from "../components/Input/InputText";
-// import { Button } from 'primereact/button';
 import AuthService from "../services/auth.service";
 import Button from "../components/Button/Button";
+import { Variant } from "../components/types/types";
 
 const Login: NextPage = () => {
     const router = useRouter();
@@ -17,8 +17,8 @@ const Login: NextPage = () => {
                 <div style={{display: "flex", alignItems: "center"}}>
                         <h4 style={{margin: "16px", fontSize: "20px"}}>Fleet</h4>   
                     <div style={{display: "flex", flexDirection: "column"}}>
-                        <InputText variant="contained" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" style={{margin: "8px", width: "250px"}} />
-                        <InputText variant="contained" value={pass} onChange={(event) => setPass(event.target.value)} placeholder="Password" type="password" style={{margin: "8px", width: "250px"}} />
+                        <InputText variant={Variant.CONTAINED} value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" style={{margin: "8px", width: "250px"}} />
+                        <InputText variant={Variant.CONTAINED} value={pass} onChange={(event) => setPass(event.target.value)} placeholder="Password" type="password" style={{margin: "8px", width: "250px"}} />
                     </div>
                 </div>
                 <Button style={{margin: "16px"}} onClick={() => {

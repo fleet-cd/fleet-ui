@@ -18,6 +18,9 @@ export function InputText(props: InputTextProps) {
     } else {
         classes.push(styles[Intent.PRIMARY]);
     }
+    if (props.variant != null && props.variant !== Variant.STANDARD) {
+        classes.push(styles[props.variant]);
+    }
     if (props.error) {
         classes.push(styles.error)
     }
