@@ -1,0 +1,10 @@
+@use "../../styles/variables" as variables;
+
+.tag {
+    background-color: variables.$accent-color-1;
+    font-size: variables.$font-size;
+    line-height: variables.$font-size;
+    color: variables.$text-color;
+    padding: 4px variables.$spacing * 2;
+    border-radius: variables.$border-radius;
+}

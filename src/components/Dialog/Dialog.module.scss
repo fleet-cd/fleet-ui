@@ -1,0 +1,39 @@
+@use "../../styles/variables" as variables;
+
+.dialogWrapper {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100000;
+    background-color: rgba(0,0,0,0.65);
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    flex-direction: column;
+}
+
+.dialog {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.dialogContent {
+    position: relative;
+    margin: auto;
+}
+
+.dialogTitle {
+    font-size: variables.$font-size * 1.35;
+    font-weight: 700;
+}
+
+.dialogBody {
+    margin: variables.$spacing * 4 0;
+}
+
+.dialogActions {
+    justify-content: flex-end;
+    display: flex;
+}

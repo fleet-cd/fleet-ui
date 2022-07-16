@@ -1,5 +1,10 @@
 {
-    "extends": "next/core-web-vitals",
+    "extends": [
+        "next/core-web-vitals",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "rules": {
         "sort-imports": [
             "error",
@@ -7,6 +12,10 @@
                 "ignoreCase": true,
                 "ignoreDeclarationSort": true
             }
-        ]
+        ],
+        "quotes": ["error", "double"],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error"],
+        "prefer-template": ["error"]
     }
 }

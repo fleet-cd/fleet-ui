@@ -1,0 +1,22 @@
+@use "../../../styles/variables" as variables;
+
+.card {
+    position: relative;
+    background-color: variables.$card-color;
+    border-radius: variables.$border-radius;
+    padding: variables.$padding;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.card-title {
+    font-size: variables.$font-size * 1.5;
+    font-weight: 700;
+    margin-bottom: variables.$spacing * 2;
+}
+
+.card-subtitle {
+    color: variables.$text-muted;
+    font-weight: 400;
+    font-size: variables.$font-size * 1.1;
+    margin-bottom: variables.$spacing * 2;
+}

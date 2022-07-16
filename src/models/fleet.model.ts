@@ -1,7 +1,7 @@
 export interface FleetResource {
     frn: string
-    modifiedAt: Date
-    createdAt: Date
+    modifiedAt: string
+    createdAt: string
 }
 
 export interface NamespacedFleetResource extends FleetResource {

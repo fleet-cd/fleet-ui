@@ -1,0 +1,15 @@
+@use "../../styles/variables" as variables;
+
+.button-set {
+    :first-child {
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+    :last-child{
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+    }
+    :not(:first-child):not(:last-child) {
+        border-radius: 0 !important;
+    }
+}

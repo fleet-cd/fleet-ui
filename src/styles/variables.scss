@@ -1,0 +1,49 @@
+
+$page-color: #252A31;
+$card-color: #1C2127;
+
+$text-color: #F6F7F9;
+$text-muted: rgb(108, 117, 125);
+
+$accent-color-1: #7961DB;
+$accent-color-2: #634DBF;
+
+$danger-1: #CD4246;
+$danger-2: #E76A6E;
+
+$font-size: 16px;
+
+$spacing: 4px;
+
+$border-radius: $spacing;
+
+$padding: $spacing * 4;
+
+$fast-transition: 125ms;
+
+$primary-intent-config: (
+    primary: $accent-color-1,
+    secondary: $accent-color-2,
+    textColor: $text-color,
+    secondaryTextColor: $text-color,
+);
+
+$danger-intent-config: (
+    primary: $danger-1,
+    secondary: $danger-2,
+    textColor: $text-color,
+    secondaryTextColor: $text-color,
+);
+
+$white-intent-config: (
+    primary: $text-color,
+    secondary: $text-color,
+    textColor: $text-color,
+    secondaryTextColor: $text-color,
+);
+
+$intents: (
+    primary: $primary-intent-config,
+    danger: $danger-intent-config,
+    white: $white-intent-config,
+);

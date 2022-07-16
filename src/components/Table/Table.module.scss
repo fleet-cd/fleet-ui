@@ -1,0 +1,45 @@
+@use "../../styles/variables" as variables;
+
+$tablePadding: variables.$spacing * 3.5 variables.$spacing * 4;
+
+.tableWrapper {
+    position: relative;
+}
+
+.tableOverflowWrapper {
+    border-radius: variables.$border-radius;
+    overflow-x: auto;
+}
+
+.table {
+    table-layout: auto;
+    border-collapse: collapse;
+    min-width: 100%;
+}
+
+.tableRow {
+    border-bottom: 1px solid variables.$page-color;
+    border-top: 1px solid variables.$page-color;
+}
+
+.tableColumnHeader {
+    padding: $tablePadding;
+    display: flex;
+    align-items: center;
+}
+
+.tableColumnHeaderContent {
+    vertical-align: middle;
+}
+
+.tableCellContent {
+    padding: $tablePadding;
+}
+
+.sortableIcon {
+    color: variables.$text-muted;
+}
+
+.sortableIconActive {
+    color: variables.$accent-color-1;
+}

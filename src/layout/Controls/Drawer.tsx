@@ -7,15 +7,20 @@ import CircleIcon from '@mui/icons-material/Circle';
 import MenuIcon from '@mui/icons-material/Menu';
 import { green, grey, red } from '@mui/material/colors';
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 
-function AppBar() {
+function Drawer() {
     const [health, setHealth] = useState<Health | null>(null)
     useEffect(() => {
         HealthService.health().then(r => {
             setHealth(r.data)
         })
     }, [])
+    const router = useRouter()
+    if (router.pathname.includes("/login")) {
+        return null
+    }
 
     const getColor = () => {
         if (!health) {
@@ -47,4 +52,4 @@ function AppBar() {
     </Box>
 }
 
-export default AppBar
+export default Drawer

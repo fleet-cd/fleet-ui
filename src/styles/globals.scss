@@ -1,0 +1,222 @@
+@use "variables" as variables; 
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #252A31;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1C2127;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #1C2127;
+}
+
+html,
+body {
+  background-color: #252A31;
+  color: #F6F7F9;
+  padding: 0;
+  margin: 0;
+  font-size: variables.$font-size;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+
+
+.p-0 {
+  padding: 0;
+}
+
+*[class*="fleet-card"] {
+  padding: 10px !important;
+}
+
+.p-card {
+  background-color: #1C2127;
+  color: #F6F7F9 ;
+}
+
+.p-card .p-card-body {
+  padding: 0 !important;
+}
+
+.p-button:focus {
+  border-color: inherit !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.p-button:focus-visible {
+  border-color: inherit !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.p-button:enabled:focus {
+  outline: 0 none !important;
+  border: 0 !important
+}
+
+.p-card .p-card-content {
+  padding: 0 !important;
+}
+
+.p-button {
+  padding: 8px 12px !important;
+  border: none !important;
+}
+
+.p-button.search-btn {
+  padding: 12px 12px !important;
+}
+
+.p-button.p-button-rounded {
+  padding: 8px !important; 
+}
+
+.p-button.p-button-danger-inverted {
+  padding: 8px 12px !important;
+  background-color: transparent;
+  color: #DC2626;
+  box-shadow:inset 0px 0px 0px 2px #DC2626;
+  
+}
+
+.p-inputtext {
+  background-color: #252A31;
+  border-color: #1C2127;
+  color: #F6F7F9;
+  border: 0
+}
+
+.p-inputtext.text-contained {
+  -webkit-box-shadow:inset 0px 0px 0px 1.5px #1C2127;
+  -moz-box-shadow:inset 0px 0px 0px 1.5px #1C2127;
+  box-shadow:inset 0px 0px 0px 1.5px #1C2127;
+}
+
+.p-inputtext:enabled:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0px #6366f1;
+  border: 0;
+}
+
+.p-inputtext:hover {
+  background-color: #252A31;
+  border: 0
+}
+
+.p-inputtext.text-contained:hover {
+  -webkit-box-shadow:inset 0px 0px 0px 1.5px #1C2127;
+  -moz-box-shadow:inset 0px 0px 0px 1.5px #1C2127;
+  box-shadow:inset 0px 0px 0px 1.5px #1C2127;
+}
+
+.p-inputtext.text-contained:enabled:focus {
+  -webkit-box-shadow:inset 0px 0px 0px 1.5px #1C2127;
+  -moz-box-shadow:inset 0px 0px 0px 1.5px #1C2127;
+  box-shadow:inset 0px 0px 0px 1.5px #1C2127;
+}
+
+:focus-visible {
+  outline: none !important;
+}
+/* .p-inputtext:focus-visible {
+} */
+
+tr, th, td {
+  color: #F6F7F9 !important;
+  border-bottom-color: #1C2127 !important;
+  border-top-color: #1C2127 !important;
+  background-color: #252A31 !important;
+}
+
+.p-paginator.p-component.p-paginator-bottom {
+  color: #F6F7F9 !important;
+  border-bottom-color: #1C2127 !important;
+  border-top-color: #1C2127 !important;
+  background-color: #252A31 !important;
+}
+
+
+.p-dialog-header, .p-dialog-content, .p-dialog-footer {
+  background-color: #1C2127 !important;
+  color: #F6F7F9 !important;
+}
+
+.sidebar .p-card-body {
+  height: 100vh !important;
+}
+
+.sidebar .p-card-content {
+  height: 100vh !important;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.sidebar-item:hover {
+  background-color: #1A1F25 !important;
+}
+
+.p-tabview .p-tabview-nav {
+  background-color: #1C2127;
+  color: #F6F7F9 ;
+  border: none;
+}
+
+.p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+  background-color: #1C2127 !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #6366f1 !important;
+  transition: color 0.2s ease !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+  outline: 0 none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background-color: #1C2127 !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background-color: #1C2127 !important;
+  border: None !important;
+  padding: 20px !important;
+}
+
+.p-tabview .p-tabview-panels {
+  background-color: #1C2127 !important;
+  color: #f6f7f9
+}
