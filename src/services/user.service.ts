@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { PaginationResponse } from "../models/fleet.model";
-import { User } from "../models/user.model";
+import { User } from "../models/auth.model";
 import { http } from "./http";
 
 export default class UserService {

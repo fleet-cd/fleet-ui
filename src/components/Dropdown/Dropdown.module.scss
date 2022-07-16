@@ -1,0 +1,78 @@
+@use "sass:map";
+@use "../../styles/variables" as variables;
+
+.inputGroup {
+    position: relative;
+    display: block;
+}
+
+.inputGroup.fill {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.baseDropDown {
+    display: inline-flex;
+    font-size: variables.$font-size;
+    transition: box-shadow variables.$fast-transition ease-out; 
+    box-shadow: 0 0 0 1px transparent inset;
+    color: variables.$text-color;
+    border-radius: variables.$border-radius;
+    background-color: variables.$page-color;
+    padding: variables.$padding;
+    appearance: none;
+    border: none;
+    width: 100%
+}
+
+@each $name, $config in variables.$intents {
+    .drop.#{$name} {
+        @extend .baseDropDown;
+    }
+    .drop.#{$name}:hover {
+        @extend .baseDropDown;
+        box-shadow: 0 0 0 1px map.get($config, "primary") inset;
+    }
+    .drop.#{$name}:focus {
+        @extend .baseDropDown;
+        box-shadow: 0 0 0 1px map.get($config, "primary") inset;
+    }
+    .drop.#{$name}.error {
+        @extend .baseDropDown;
+        box-shadow: 0 0 0 1px variables.$danger-1 inset;
+    }
+
+    .drop.#{$name}.contained {
+        @extend .baseDropDown;
+        box-shadow: 0 0 0 1px variables.$card-color inset;
+    }
+    .drop.#{$name}.contained:hover {
+        @extend .baseDropDown;
+        box-shadow: 0 0 0 1px map.get($config, "primary") inset;
+    }
+    .drop.#{$name}.contained:focus {
+        @extend .baseDropDown;
+        box-shadow: 0 0 0 1px map.get($config, "primary") inset;
+    }
+    .drop.#{$name}.contained.error {
+        @extend .baseDropDown;
+        box-shadow: 0 0 0 1px variables.$danger-1 inset;
+    }
+}
+
+.errorText {
+    font-size: 12px;
+    color: variables.$danger-1;
+    line-height: 20px;
+}
+
+.options {
+    position: absolute;
+}
+
+.optionsContainer {
+    max-height: 240px;
+    overflow: auto;
+}

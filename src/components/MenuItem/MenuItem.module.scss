@@ -1,0 +1,13 @@
+@use "../../styles/variables" as variables;
+
+.menuItem {
+    font-size: variables.$font-size;
+    cursor: pointer;
+    padding: variables.$padding;
+    transition: background-color variables.$fast-transition ease-out;
+}
+
+.menuItem:hover {
+    padding: variables.$padding;
+    background-color: darken(variables.$card-color, 1.5);
+}

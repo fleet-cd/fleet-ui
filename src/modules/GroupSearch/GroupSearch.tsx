@@ -4,18 +4,18 @@ import Card from "../../components/Cards/Card/Card";
 import { InputText } from "../../components/Input/InputText";
 import Button from "../../components/Button/Button";
 import { Column as Col, Table } from "../../components/Table/Table";
-import { User } from "../../models/auth.model";
-import UserService from "../../services/user.service";
+import { Group } from "../../models/auth.model";
+import AuthService from "../../services/auth.service";
 import { Variant } from "../../components/types/types";
 
 
-const UserSearcb = () => {
-    const [users, setUsers] = useState<User[] | null>([]);
+const GroupSearch = () => {
+    const [groups, setGroups] = useState<Group[] | null>([]);
     const [sort, setSort] = useState("-name");
     useEffect(() => {
-        UserService.listUsers(0, 0, sort).then(r => {
-            const items = r.data.items.length ? r.data.items : [];
-            setUsers(items);
+        AuthService.listGroups().then(r => {
+            const items = r.data.length ? r.data : [];
+            setGroups(items);
         });
     }, [sort]);
     
@@ -28,22 +28,21 @@ const UserSearcb = () => {
                         <InputText placeholder="Search" style={{ width: "100%", borderTopRightRadius: 0, borderBottomRightRadius: 0 }} />
                     </span>
                     <Button className="search-btn" style={{ padding: "16px 12px", borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}>Search</Button>
-                    <Button variant={Variant.CONTAINED} style={{ marginLeft: "16px", padding: "16px 12px" }}>Create User</Button>
+                    <Button variant={Variant.CONTAINED} style={{ marginLeft: "16px", padding: "16px 12px" }}>Create Group</Button>
                 </div>
             </Card>
             <Card style={{ width: "100%", marginTop: "8px" }}>
-                {!users || users.length == 0 ? (
+                {!groups || groups.length == 0 ? (
                     <NoDataFound />
                 ) : (
-                    <Table values={users} sortDirection={sort[0] === "-" ? -1 : 1} sortCol={sort.substring(1)} setSort={(col, dir) => setSort(`${dir === -1 ? "-" : "+"}${col}`)}>
+                    <Table values={groups} sortDirection={sort[0] === "-" ? -1 : 1} sortCol={sort.substring(1)} setSort={(col, dir) => setSort(`${dir === -1 ? "-" : "+"}${col}`)}>
                         <Col key="name" title="Name" sortable />
-                        <Col key="email" title="Email" sortable/>
-                        <Col key="createdAt" title="Date Created" sortable formatter={(val: User) => new Date(val.createdAt).toLocaleDateString("en-US", {
+                        <Col key="createdAt" title="Date Created" sortable formatter={(val: Group) => new Date(val.createdAt).toLocaleDateString("en-US", {
                             day: "2-digit",
                             month: "2-digit",
                             year: "numeric",
                         })} />
-                        <Col key="modifiedAt" title="Last Modified" sortable formatter={(val: User) => new Date(val.modifiedAt).toLocaleDateString("en-US", {
+                        <Col key="modifiedAt" title="Last Modified" sortable formatter={(val: Group) => new Date(val.modifiedAt).toLocaleDateString("en-US", {
                             day: "2-digit",
                             month: "2-digit",
                             year: "numeric",
@@ -55,4 +54,4 @@ const UserSearcb = () => {
     );
 };
 
-export default UserSearcb;
+export default GroupSearch;

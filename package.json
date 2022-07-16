@@ -21,6 +21,7 @@
     "@react-spring/web": "^9.5.0",
     "@types/react-transition-group": "^4.4.5",
     "axios": "^0.27.2",
+    "focus-trap-react": "^9.0.2",
     "next": "12.2.2",
     "notistack": "^3.0.0-alpha.7",
     "primeicons": "^5.0.0",
