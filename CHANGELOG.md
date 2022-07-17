@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/fleet-cd/fleet-ui/compare/v0.4.0...v0.5.0) (2022-07-17)
+
+
+### Features
+
+* add namespaces ([222c6e7](https://github.com/fleet-cd/fleet-ui/commit/222c6e7c7201b9421cc37274b2299f27a43fa205))
+* add user editing ([05d040a](https://github.com/fleet-cd/fleet-ui/commit/05d040a82a423505ecaafcfa69f17cda3ed4d210))
+
 ## [0.4.0](https://github.com/fleet-cd/fleet-ui/compare/v0.3.0...v0.4.0) (2022-07-17)
 
 
