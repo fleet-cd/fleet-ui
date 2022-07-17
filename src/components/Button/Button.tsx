@@ -6,21 +6,29 @@ import styles from "./Button.module.scss";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> { 
     variant?: Variant
     intent?: Intent
+    fill?: boolean
 } 
 
 const Button = (props: ButtonProps) => {
+    const {
+        fill,
+        ...rest
+    } = props
     const classes = [styles.button];
-    if (props.variant != null && props.variant !== Variant.STANDARD) {
-        classes.push(styles[props.variant]);
+    if (fill) {
+        classes.push(styles.fill)
     }
-    if (props.intent != null && props.intent !== Intent.PRIMARY) {
-        classes.push(styles[props.intent]);
+    if (rest.variant != null && rest.variant !== Variant.STANDARD) {
+        classes.push(styles[rest.variant]);
+    }
+    if (rest.intent != null && rest.intent !== Intent.PRIMARY) {
+        classes.push(styles[rest.intent]);
     } else {
         classes.push(styles[Intent.PRIMARY]);
     }
-    const className = getClassName(props.className, [...classes]);
+    const className = getClassName(rest.className, [...classes]);
     return (
-        <button {...props} className={className}>{props.children}</button>
+        <button {...rest} className={className}>{props.children}</button>
     );
 };
 

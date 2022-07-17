@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { Group, Permission } from "../models/auth.model";
+import { CreatePermissionRequest, Group, Permission } from "../models/auth.model";
 import { http } from "./http";
 
 export default class AuthService {
@@ -11,5 +11,8 @@ export default class AuthService {
     }
     static listPermissions(): Promise<AxiosResponse<Permission[]>> {
         return http.get(`${process.env.api}/api/v1/auth/permissions`);
+    }
+    static createPermission(perm: CreatePermissionRequest): Promise<AxiosResponse<Permission>> {
+        return http.post(`${process.env.api}/api/v1/auth/permissions`, perm);
     }
 }

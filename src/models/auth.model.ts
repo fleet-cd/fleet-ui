@@ -13,12 +13,19 @@ export interface Group {
     createdAt: string
 }
 
+export interface CreatePermissionRequest {
+    name: string
+    namespace: string
+    resourceType: string 
+    actions: string[]
+}
+
 export interface Permission {
     frn: string
     name: string
     namespace: string
     resourceType: string 
-    action: string
+    actions: string[]
     createdAt: string
     modifiedAt: string
 }

@@ -19,7 +19,7 @@ const PermissionSearch = () => {
             const items = r.data.length ? r.data : [];
             setPerms(items);
         });
-    }, [sort]);
+    }, [sort, dialogOpen]);
     
     return (
         <>

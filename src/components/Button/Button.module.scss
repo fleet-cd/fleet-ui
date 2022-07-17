@@ -2,8 +2,12 @@
 @use "../../styles/variables" as variables;
 
 
-
-
+.button.fill {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 100%;
+}
 
 .base-button {
     border-radius: variables.$border-radius;
@@ -13,7 +17,6 @@
     transition: background-color variables.$fast-transition ease-out;
     cursor: pointer;
 }
-
 
 @each $name, $config in variables.$intents {
     @debug map.get($config, "primary");
@@ -26,6 +29,12 @@
         background-color: map.get($config, "secondary");
         color: map.get($config, "textColor");
     }
+    .button.#{$name}:disabled {
+        cursor: not-allowed;
+        background-color: variables.makeDisabled($color: map.get($config, "secondary")); 
+        color: variables.makeDisabled($color: map.get($config, "textColor"));
+    }
+
     .button.contained.#{$name} {
         @extend .base-button;
         background-color: transparent;
@@ -36,6 +45,12 @@
         background-color: map.get($config, "primary");
         color: map.get($config, "textColor");
     }
+    .button.contained.#{$name}:disabled {
+        cursor: not-allowed;
+        background-color: transparent;
+        color: variables.makeDisabled($color: map.get($config, "primary"));
+    }
+
     .button.text.#{$name} {
         @extend .base-button;
         background-color: transparent;
@@ -43,5 +58,10 @@
     }
     .button.text.#{$name}:hover {
         background-color:rgba(0, 0, 0, 0.1);
+    }
+    .button.text.#{$name}:disabled {
+        cursor: not-allowed;
+        background-color: transparent;
+        color: variables.makeDisabled($color: map.get($config, "primary"));
     }
 }
