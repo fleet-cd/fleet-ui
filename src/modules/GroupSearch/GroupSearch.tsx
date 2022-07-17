@@ -7,9 +7,11 @@ import { Column as Col, Table } from "../../components/Table/Table";
 import { Group } from "../../models/auth.model";
 import AuthService from "../../services/auth.service";
 import { Variant } from "../../components/types/types";
+import { useRouter } from "next/router";
 
 
 const GroupSearch = () => {
+    const router = useRouter()
     const [groups, setGroups] = useState<Group[] | null>([]);
     const [sort, setSort] = useState("-name");
     useEffect(() => {
@@ -18,7 +20,7 @@ const GroupSearch = () => {
             setGroups(items);
         });
     }, [sort]);
-    
+
     return (
         <>
             <Card style={{ width: "100%" }}>
@@ -28,7 +30,7 @@ const GroupSearch = () => {
                         <InputText placeholder="Search" style={{ width: "100%", borderTopRightRadius: 0, borderBottomRightRadius: 0 }} />
                     </span>
                     <Button className="search-btn" style={{ padding: "16px 12px", borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}>Search</Button>
-                    <Button variant={Variant.CONTAINED} style={{ marginLeft: "16px", padding: "16px 12px" }}>Create Group</Button>
+                    <Button onClick={() => router.push("/create/group")} variant={Variant.CONTAINED} style={{ marginLeft: "16px", padding: "16px 12px" }}>Create Group</Button>
                 </div>
             </Card>
             <Card style={{ width: "100%", marginTop: "8px" }}>

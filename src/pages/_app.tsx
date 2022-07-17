@@ -8,22 +8,24 @@ import "react-loading-skeleton/dist/skeleton.css";
 // import 'primereact/resources/themes/lara-light-indigo/theme.css';  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 // import 'primeicons/primeicons.css';                                //icons
- 
+
 import { setConfiguration } from "react-grid-system";
 import { Intent, Variant } from "../components/types/types";
 
 setConfiguration({ maxScreenClass: "xl" });
 
 function MyApp({ Component, pageProps }: AppProps) {
-    return <SnackbarProvider maxSnack={3} action={(snackbarId) => (
-        <Button intent={Intent.WHITE} variant={Variant.TEXT} onClick={() => closeSnackbar(snackbarId)}>
-          Dismiss
-        </Button>
-      )}>
+  return <SnackbarProvider maxSnack={3} action={(snackbarId) => (
+    <Button intent={Intent.WHITE} variant={Variant.TEXT} onClick={() => closeSnackbar(snackbarId)}>
+      Dismiss
+    </Button>
+  )}>
     <Page>
-    <Component {...pageProps} />
-</Page>
-</SnackbarProvider>;
+      <div style={{ minHeight: "calc(100vh - 68px)" }}>
+        <Component {...pageProps} />
+      </div>
+    </Page>
+  </SnackbarProvider>;
 }
 
 export default MyApp;

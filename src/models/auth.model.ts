@@ -16,15 +16,26 @@ export interface Group {
 export interface CreatePermissionRequest {
     name: string
     namespace: string
-    resourceType: string 
+    resourceType: string
     actions: string[]
+}
+
+export interface CreateGroupRequest {
+    name: string
+    permissions: string[]
+}
+
+export interface CreateUserRequest {
+    name: string
+    email: string
+    password: string
 }
 
 export interface Permission {
     frn: string
     name: string
     namespace: string
-    resourceType: string 
+    resourceType: string
     actions: string[]
     createdAt: string
     modifiedAt: string

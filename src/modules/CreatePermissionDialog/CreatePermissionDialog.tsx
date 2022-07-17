@@ -49,19 +49,18 @@ const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) =>
         setNamespaceError(undefined)
         AuthService.createPermission({
             name,
-            namespace,
+            namespace: namespace === "all" ? "*" : namespace,
             actions: actions.map(a => a.toLowerCase()),
             resourceType: resource.toLowerCase()
         })
-        .then(() => {
-            props.setOpen(false)
-            enqueueSnackbar("Permission created!", { variant: "success" })
-        })
-        .catch(() => {
-            props.setOpen(false)
-            enqueueSnackbar("Could not create permission.", { variant: "error" })
-        })
-        
+            .then(() => {
+                props.setOpen(false)
+                enqueueSnackbar("Permission created!", { variant: "success" })
+            })
+            .catch(() => {
+                props.setOpen(false)
+                enqueueSnackbar("Could not create permission.", { variant: "error" })
+            })
     }
 
     return (
