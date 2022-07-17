@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/fleet-cd/fleet-ui/compare/v0.3.0...v0.4.0) (2022-07-17)
+
+
+### Features
+
+* add create permissions, users, and groups ([#6](https://github.com/fleet-cd/fleet-ui/issues/6)) ([144fab8](https://github.com/fleet-cd/fleet-ui/commit/144fab8cf30be69ca338b5de284a841051bb13fa))
+* inital create permission ([d69f998](https://github.com/fleet-cd/fleet-ui/commit/d69f9985ff6a0ea1270e4b0aeea7d42b46422ab0))
+
 ## [0.3.0](https://github.com/fleet-cd/fleet-ui/compare/v0.2.1...v0.3.0) (2022-07-16)
 
 
