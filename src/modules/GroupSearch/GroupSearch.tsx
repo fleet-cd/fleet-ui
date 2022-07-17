@@ -8,6 +8,8 @@ import { Group } from "../../models/auth.model";
 import AuthService from "../../services/auth.service";
 import { Variant } from "../../components/types/types";
 import { useRouter } from "next/router";
+import { IconButton } from "../../components/IconButton/IconButton";
+import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
 
 const GroupSearch = () => {
@@ -49,6 +51,7 @@ const GroupSearch = () => {
                             month: "2-digit",
                             year: "numeric",
                         })} />
+                        <Col key="actions" title="" formatter={(v: Group) => <IconButton onClick={() => router.push(`/resources/groups/${v.name}`)} icon={faUserGroup} />} />
                     </Table>
                 )}
             </Card>

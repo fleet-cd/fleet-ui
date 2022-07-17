@@ -7,7 +7,7 @@ import { InputText, InputTextProps } from "../Input/InputText"
 import { MenuItem } from "../MenuItem/MenuItem"
 
 interface DropdownProps<T> extends InputTextProps {
-    items: T[]
+    items?: T[]
     renderer: (item: T, index: number) => React.ReactNode
     stringRenderer: (item: T) => string
     selected?: T
@@ -30,6 +30,7 @@ export function Dropdown<T>(properties: DropdownProps<T>) {
         setOpen(false)
     }, [selected])
     const sel2 = selected != null ? stringRenderer(selected) : "Select"
+    // const actualItems = items != null ? items : []
 
     return (
         <div className={props.fill ? styles.fill : ""}>
@@ -46,7 +47,7 @@ export function Dropdown<T>(properties: DropdownProps<T>) {
                         <animated.div style={st} className={styles.options}>
                             <Card style={{ padding: 0 }}>
                                 <div className={styles.optionsContainer}>
-                                    {items.length !== 0 ? (
+                                    {items != null && items.length !== 0 ? (
                                         items.map((i, idx) => renderer(i, idx))
                                     ) : (
                                         <MenuItem>No Data</MenuItem>

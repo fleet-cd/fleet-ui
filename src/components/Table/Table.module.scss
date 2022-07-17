@@ -43,3 +43,15 @@ $tablePadding: variables.$spacing * 3.5 variables.$spacing * 4;
 .sortableIconActive {
     color: variables.$accent-color-1;
 }
+
+.right {
+    justify-content: right;
+}
+
+.left {
+    justify-content: left;
+}
+
+.center {
+    justify-content: center;
+}

@@ -10,4 +10,13 @@ export default class UserService {
     static createUser(perm: CreateUserRequest): Promise<AxiosResponse<User>> {
         return http.post(`${process.env.api}/api/v1/users`, perm);
     }
+    static getUser(frn: string): Promise<AxiosResponse<User>> {
+        return http.get(`${process.env.api}/api/v1/users/${frn}`);
+    }
+    static removeGroup(frn: string, groupName: string) {
+        return http.delete(`${process.env.api}/api/v1/users/${frn}/groups/${groupName}`);
+    }
+    static addGroup(frn: string, groupName: string) {
+        return http.put(`${process.env.api}/api/v1/users/${frn}/groups/${groupName}`);
+    }
 }

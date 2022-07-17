@@ -5,10 +5,11 @@ import styles from "./Table.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface ColumnProps<T> {
-    title?: string
+    title?: React.ReactNode
     key: string
     formatter?: (val: T, idx: number) => React.ReactNode
     sortable?: boolean
+    align?: "right" | "left" | "center"
 }
 
 export function Column<T>(props: ColumnProps<T>) {
@@ -20,7 +21,7 @@ export function Column<T>(props: ColumnProps<T>) {
 }
 
 export interface TableProps<T> {
-    values: T[]
+    values?: T[]
     children?: JSX.Element[] | JSX.Element
     pagination?: boolean
     sortDirection?: number
@@ -54,8 +55,8 @@ export function Table<T extends { [v: string]: any }>(props: TableProps<T>) {
                         return;
                     }
                     return <th key={i} role="columnheader" style={{ userSelect: "none", cursor: col.props.sortable ? "pointer" : "auto" }}>
-                        <div className={styles.tableColumnHeader} onClick={() => handleClick(col.key?.toString() || "")}>
-                            <div className={styles.tableColumnHeaderContent}>
+                        <div className={`${styles.tableColumnHeader} ${styles[col.props.align]}`} onClick={() => handleClick(col.key?.toString() || "")}>
+                            <div className={`${styles.tableColumnHeaderContent}`}>
                                 {col.props.title}
                             </div>
                             {col.props.sortable && <>
@@ -95,24 +96,26 @@ export function Table<T extends { [v: string]: any }>(props: TableProps<T>) {
         <div className={styles.tableOverflowWrapper}>
             <table className={styles.table} role="table">
                 {tableHeader}
-                <tbody>
-                    {props.values.map((v, i) => <tr className={styles.tableRow} key={i} role="row">
-                        {eles.map((col, k) => {
-                            if (col == null) {
-                                return;
+                {props.values && props.values.length !== 0 &&
+                    <tbody>
+                        {props.values.map((v, i) => <tr className={styles.tableRow} key={i} role="row">
+                            {eles.map((col, k) => {
+                                if (col == null) {
+                                    return;
+                                }
+                                return <td className={`${styles.tableCellContent} ${styles[col.props.align]}`} key={k} role="cell" >{
+                                    col.props.formatter ? (
+                                        col.props.formatter(v, i)
+                                    ) : (
+                                        v[col.key || ""]
+                                    )
+                                }</td>
                             }
-                            return <td className={styles.tableCellContent} key={k} role="cell">{
-                                col.props.formatter ? (
-                                    col.props.formatter(v, i)
-                                ) : (
-                                    v[col.key || ""]
-                                )
-                            }</td>
-                        }
-                        )}
+                            )}
 
-                    </tr>)}
-                </tbody>
+                        </tr>)}
+                    </tbody>
+                }
                 {props.pagination && tableFooter}
             </table>
         </div>

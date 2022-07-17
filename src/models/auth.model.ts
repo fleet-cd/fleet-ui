@@ -13,6 +13,11 @@ export interface Group {
     createdAt: string
 }
 
+export interface GetGroupResponse {
+    group: Group
+    expandedPermissions: Permission[]
+}
+
 export interface CreatePermissionRequest {
     name: string
     namespace: string

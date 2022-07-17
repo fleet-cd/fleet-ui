@@ -3,3 +3,9 @@ export interface Namespace {
     createdAt: string
     modifiedAt: string
 }
+
+export const DEFAULT_NAMESPACE = {
+    name: "default",
+    createdAt: "",
+    modifiedAt: ""
+}

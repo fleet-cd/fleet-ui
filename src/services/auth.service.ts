@@ -1,10 +1,16 @@
 import { AxiosResponse } from "axios";
-import { CreateGroupRequest, CreatePermissionRequest, Group, Permission } from "../models/auth.model";
+import { CreateGroupRequest, CreatePermissionRequest, GetGroupResponse, Group, Permission } from "../models/auth.model";
 import { http } from "./http";
 
 export default class AuthService {
     static login(email: string, password: string) {
         return http.post(`${process.env.api}/api/v1/auth/login`, { email, password });
+    }
+    static getGroup(name: string, expandPermissions: boolean): Promise<AxiosResponse<GetGroupResponse>> {
+        return http.get(`${process.env.api}/api/v1/auth/groups/${name}`, { params: { expandPermissions } });
+    }
+    static removePermissionFromGroup(name: string, permissionName: string) {
+        return http.delete(`${process.env.api}/api/v1/auth/groups/${name}/${permissionName}`);
     }
     static listGroups(sort?: string): Promise<AxiosResponse<Group[]>> {
         return http.get(`${process.env.api}/api/v1/auth/groups`, { params: { sort } });

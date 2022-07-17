@@ -10,9 +10,11 @@ import { Variant } from "../../components/types/types";
 import CreateUserDialog from "../CreateUserDialog/CreateUserDialog";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from "../../components/IconButton/IconButton";
+import { useRouter } from "next/router";
 
 
 const UserSearch = () => {
+    const router = useRouter()
     const [dialogOpen, setDialogOpen] = useState(false)
     const [users, setUsers] = useState<User[] | null>([]);
     const [sort, setSort] = useState("+name");
@@ -52,7 +54,7 @@ const UserSearch = () => {
                             month: "2-digit",
                             year: "numeric",
                         })} />
-                        <Col key="actions" title="" formatter={() => <IconButton icon={faUser} />} />
+                        <Col key="actions" title="" formatter={(u: User) => <IconButton icon={faUser} onClick={() => router.push(`/resources/users/${u.frn}`)} />} />
                     </Table>
                 )}
             </Card>

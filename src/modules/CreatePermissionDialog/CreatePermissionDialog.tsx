@@ -47,7 +47,7 @@ const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) =>
             name,
             namespace: namespace.name,
             actions: actions.map(a => a.toLowerCase()),
-            resourceType: resource.toLowerCase()
+            resourceType: resource.toLowerCase() === "all" ? "*" : resource.toLowerCase()
         })
             .then(() => {
                 props.setOpen(false)

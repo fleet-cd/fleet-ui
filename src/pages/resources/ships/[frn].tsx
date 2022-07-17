@@ -1,15 +1,14 @@
 import { useRouter } from "next/router";
 import React from "react";
-import Card from "../../../components/Cards/Card/Card";
 import { FlexList } from "../../../components/FlexList/FlexList";
 import { Ship } from "../../../models/ship.model";
 import ShipService from "../../../services/ship.service";
-import { LabelString } from "../../../components/LabelString/LabelString";
 import Tag from "../../../components/Tag/Tag";
 import Button from "../../../components/Button/Button";
 import { Intent, Variant } from "../../../components/types/types";
 import { ConfirmationDialog } from "../../../components/Dialog/ConfirmationDialog";
-import Skeleton from "../../../components/Skeleton/Skeleton";
+import ResourceTitleCard from "../../../modules/ResourceTitleCard/ResourceTitleCard";
+import { enqueueSnackbar } from "notistack";
 
 
 const Ship = () => {
@@ -36,7 +35,9 @@ const Ship = () => {
         }
         ShipService.deleteShip(frn.toString()).then(() => {
             router.push("/search/ships");
-        });
+        })
+            .catch(() => enqueueSnackbar("Could not delete ship. Please contact your system administrator.", { variant: "error" }))
+            .finally(() => setDialogOpen(false))
     };
 
     const rejectAction = () => {
@@ -45,23 +46,22 @@ const Ship = () => {
 
 
     return <div>
-        <Card button={<Button variant={Variant.CONTAINED} intent={Intent.DANGER} onClick={confirm}>Delete</Button>} title={`${ship?.namespace}/${ship?.name}` || <Skeleton />} subTitle={ship?.frn || <Skeleton />}>
-            <FlexList gap={24}>
-                <LabelString label="Date Created">
-                    {ship && `${new Date(ship?.modifiedAt).toLocaleTimeString()} ${new Date(ship?.createdAt).toLocaleDateString()}` || <Skeleton />}
-                </LabelString>
-                <LabelString label="Last Modified">
-                    {ship && `${new Date(ship?.modifiedAt).toLocaleTimeString()} ${new Date(ship?.modifiedAt).toLocaleDateString()}` || <Skeleton />}
-                </LabelString>
-            </FlexList>
-            <FlexList gap={8} style={{ marginTop: "8px" }}>
+        <ResourceTitleCard
+            hasFrn
+            name={`${ship?.namespace}/${ship?.name}`}
+            frn={ship?.frn}
+            modifiedAt={ship?.modifiedAt}
+            createdAt={ship?.createdAt}
+            actions={<Button variant={Variant.CONTAINED} intent={Intent.DANGER} onClick={confirm}>Delete</Button>}
+        >
+            <FlexList gap={8}>
                 {ship?.tags.map(t => <Tag key={t}>{t}</Tag>)}
             </FlexList>
-        </Card>
+        </ResourceTitleCard>
         <ConfirmationDialog
-            title="Are you sure you want to continue?" 
-            body="This action is irreversable" 
-            open={dialogOpen} 
+            title="Are you sure you want to continue?"
+            body="This action is irreversable"
+            open={dialogOpen}
             setOpen={setDialogOpen}
             confirmAction={confirmAction}
             rejectAction={rejectAction}

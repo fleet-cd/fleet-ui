@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Namespace } from "../../models/namespace.model"
 import { useState, useEffect } from "react"
 import OtherService from "../../services/other.service"
@@ -5,7 +6,7 @@ import { useSnackbar } from "notistack"
 import { Dropdown } from "../../components/Dropdown/Dropdown"
 import { MenuItem } from "../../components/MenuItem/MenuItem"
 
-export default function NamespaceSelect(props: { selected: Namespace, setSelected: (n: Namespace) => void, allowAll?: boolean }) {
+export default function NamespaceSelect(props: { selected: Namespace, setSelected: (n: Namespace) => void, allowAll?: boolean, fill?: boolean }) {
     const [namespaces, setNamespaces] = useState<Namespace[]>([{ name: "*", createdAt: "", modifiedAt: "" }])
     const { enqueueSnackbar } = useSnackbar()
 
@@ -22,6 +23,7 @@ export default function NamespaceSelect(props: { selected: Namespace, setSelecte
     }, [])
 
     return <Dropdown
+        fill={props.fill}
         items={namespaces}
         selected={props.selected}
         renderer={(item) => <MenuItem onClick={() => props.setSelected(item)}>{item.name}</MenuItem>}
