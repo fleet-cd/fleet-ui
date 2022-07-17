@@ -8,17 +8,18 @@ import Button from "../../components/Button/Button";
 import { Intent, Variant } from "../../components/types/types";
 import AuthService from "../../services/auth.service";
 import { useSnackbar } from "notistack";
+import NamespaceSelect from "../NamespaceSelect/NamespaceSelect";
+import { Namespace } from "../../models/namespace.model";
 
 
 const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) => void }) => {
     const { enqueueSnackbar } = useSnackbar()
     const [actions, setActions] = useState(["VIEW"])
     const [resource, setResource] = useState("ALL")
-    const [namespace, setNamespace] = useState<string>("*")
+    const [namespace, setNamespace] = useState<Namespace>({ name: "*", createdAt: "", modifiedAt: "" })
     const [name, setName] = useState<string>("")
 
     const [nameError, setNameError] = useState<string | undefined>()
-    const [namespaceError, setNamespaceError] = useState<string | undefined>()
 
     const setInnerAction = (idx: number, value: string) => {
         const copy = [...actions]
@@ -38,18 +39,13 @@ const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) =>
             setNameError("Name must be alphanumeric characters and dashes")
             hasError = true
         }
-        if (!namespace.match(/^[a-z0-9\\-]+|\\*$/)) {
-            setNamespaceError("Namespace must be alphanumeric characters and dashes")
-            hasError = true
-        }
         if (hasError) {
             return
         }
         setNameError(undefined)
-        setNamespaceError(undefined)
         AuthService.createPermission({
             name,
-            namespace: namespace === "all" ? "*" : namespace,
+            namespace: namespace.name,
             actions: actions.map(a => a.toLowerCase()),
             resourceType: resource.toLowerCase()
         })
@@ -89,7 +85,7 @@ const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) =>
                 </div>
                 <div style={{ marginBottom: "16px" }}>
                     <Label label="Namespace">
-                        <InputText value={namespace} onChange={(e) => setNamespace(e.target.value)} error={namespaceError} fill placeholder="Namespace" />
+                        <NamespaceSelect allowAll selected={namespace} setSelected={setNamespace} />
                     </Label>
                 </div>
                 <div style={{ marginBottom: "16px" }}>

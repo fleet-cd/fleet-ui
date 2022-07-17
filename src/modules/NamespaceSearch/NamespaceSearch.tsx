@@ -4,20 +4,21 @@ import Card from "../../components/Cards/Card/Card";
 import { InputText } from "../../components/Input/InputText";
 import Button from "../../components/Button/Button";
 import { Column as Col, Table } from "../../components/Table/Table";
-import { Permission } from "../../models/auth.model";
-import AuthService from "../../services/auth.service";
+import { Group } from "../../models/auth.model";
+import { Namespace } from "../../models/namespace.model";
+import OtherService from "../../services/other.service";
+import CreateNamespaceDialog from "../CreateNamespaceDialog/CreateNamespaceDialog";
 import { Variant } from "../../components/types/types";
-import CreatePermissionDialog from "../CreatePermissionDialog/CreatePermissionDialog";
 
 
-const PermissionSearch = () => {
+const NamespaceSearch = () => {
     const [dialogOpen, setDialogOpen] = useState(false)
-    const [perms, setPerms] = useState<Permission[] | null>([]);
+    const [ns, setNs] = useState<Namespace[] | null>([]);
     const [sort, setSort] = useState("+name");
     useEffect(() => {
-        AuthService.listPermissions(sort).then(r => {
+        OtherService.listNamespaces(sort).then(r => {
             const items = r.data.length ? r.data : [];
-            setPerms(items);
+            setNs(items);
         });
     }, [sort, dialogOpen]);
 
@@ -30,21 +31,21 @@ const PermissionSearch = () => {
                         <InputText placeholder="Search" style={{ width: "100%", borderTopRightRadius: 0, borderBottomRightRadius: 0 }} />
                     </span>
                     <Button className="search-btn" style={{ padding: "16px 12px", borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}>Search</Button>
-                    <Button onClick={() => setDialogOpen(true)} variant={Variant.CONTAINED} style={{ marginLeft: "16px", padding: "16px 12px" }}>Create Permission</Button>
+                    <Button onClick={() => setDialogOpen(true)} variant={Variant.CONTAINED} style={{ marginLeft: "16px", padding: "16px 12px" }}>Create Namespace</Button>
                 </div>
             </Card>
             <Card style={{ width: "100%", marginTop: "8px" }}>
-                {!perms || perms.length == 0 ? (
+                {!ns || ns.length == 0 ? (
                     <NoDataFound />
                 ) : (
-                    <Table values={perms} sortDirection={sort[0] === "-" ? -1 : 1} sortCol={sort.substring(1)} setSort={(col, dir) => setSort(`${dir === -1 ? "-" : "+"}${col}`)}>
+                    <Table values={ns} sortDirection={sort[0] === "-" ? -1 : 1} sortCol={sort.substring(1)} setSort={(col, dir) => setSort(`${dir === -1 ? "-" : "+"}${col}`)}>
                         <Col key="name" title="Name" sortable />
-                        <Col key="createdAt" title="Date Created" sortable formatter={(val: Permission) => new Date(val.createdAt).toLocaleDateString("en-US", {
+                        <Col key="createdAt" title="Date Created" sortable formatter={(val: Group) => new Date(val.createdAt).toLocaleDateString("en-US", {
                             day: "2-digit",
                             month: "2-digit",
                             year: "numeric",
                         })} />
-                        <Col key="modifiedAt" title="Last Modified" sortable formatter={(val: Permission) => new Date(val.modifiedAt).toLocaleDateString("en-US", {
+                        <Col key="modifiedAt" title="Last Modified" sortable formatter={(val: Group) => new Date(val.modifiedAt).toLocaleDateString("en-US", {
                             day: "2-digit",
                             month: "2-digit",
                             year: "numeric",
@@ -52,9 +53,9 @@ const PermissionSearch = () => {
                     </Table>
                 )}
             </Card>
-            <CreatePermissionDialog open={dialogOpen} setOpen={setDialogOpen} />
+            <CreateNamespaceDialog open={dialogOpen} setOpen={setDialogOpen} />
         </>
     );
 };
 
-export default PermissionSearch;
+export default NamespaceSearch;

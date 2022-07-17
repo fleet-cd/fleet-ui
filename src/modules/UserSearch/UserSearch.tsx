@@ -12,10 +12,10 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from "../../components/IconButton/IconButton";
 
 
-const UserSearcb = () => {
+const UserSearch = () => {
     const [dialogOpen, setDialogOpen] = useState(false)
     const [users, setUsers] = useState<User[] | null>([]);
-    const [sort, setSort] = useState("-name");
+    const [sort, setSort] = useState("+name");
     useEffect(() => {
         UserService.listUsers(0, 0, sort).then(r => {
             const items = r.data.items.length ? r.data.items : [];
@@ -61,4 +61,4 @@ const UserSearcb = () => {
     );
 };
 
-export default UserSearcb;
+export default UserSearch;

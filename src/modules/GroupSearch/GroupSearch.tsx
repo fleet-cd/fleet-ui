@@ -13,9 +13,9 @@ import { useRouter } from "next/router";
 const GroupSearch = () => {
     const router = useRouter()
     const [groups, setGroups] = useState<Group[] | null>([]);
-    const [sort, setSort] = useState("-name");
+    const [sort, setSort] = useState("+name");
     useEffect(() => {
-        AuthService.listGroups().then(r => {
+        AuthService.listGroups(sort).then(r => {
             const items = r.data.length ? r.data : [];
             setGroups(items);
         });
