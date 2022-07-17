@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { InputHTMLAttributes } from "react";
 import { getClassName } from "../../utils/classnames";
 import { Intent, Variant } from "../types/types";
@@ -11,8 +12,9 @@ export interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function InputText(props: InputTextProps) {
-    const {
+    let {
         fill,
+        onChange,
         ...rest
     } = props
     const classes = [styles.inputText];
@@ -29,8 +31,10 @@ export function InputText(props: InputTextProps) {
     }
     const className = getClassName(props.className, [...classes]);
 
+
     return <div className={`${styles.inputGroup} ${fill ? styles.fill : ""}`}>
         <input {...rest}
+            onChange={onChange}
             className={className}>
             {props.children}
         </input>

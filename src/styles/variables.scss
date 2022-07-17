@@ -47,3 +47,11 @@ $intents: (
     danger: $danger-intent-config,
     white: $white-intent-config,
 );
+
+
+
+// ----- FCNS ----- //
+
+@function makeDisabled($color) {
+    @return transparentize($color: $color, $amount: 0.5);
+}

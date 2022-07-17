@@ -7,9 +7,13 @@ import { Column as Col, Table } from "../../components/Table/Table";
 import { User } from "../../models/auth.model";
 import UserService from "../../services/user.service";
 import { Variant } from "../../components/types/types";
+import CreateUserDialog from "../CreateUserDialog/CreateUserDialog";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { IconButton } from "../../components/IconButton/IconButton";
 
 
 const UserSearcb = () => {
+    const [dialogOpen, setDialogOpen] = useState(false)
     const [users, setUsers] = useState<User[] | null>([]);
     const [sort, setSort] = useState("-name");
     useEffect(() => {
@@ -17,8 +21,8 @@ const UserSearcb = () => {
             const items = r.data.items.length ? r.data.items : [];
             setUsers(items);
         });
-    }, [sort]);
-    
+    }, [sort, dialogOpen]);
+
     return (
         <>
             <Card style={{ width: "100%" }}>
@@ -28,7 +32,7 @@ const UserSearcb = () => {
                         <InputText placeholder="Search" style={{ width: "100%", borderTopRightRadius: 0, borderBottomRightRadius: 0 }} />
                     </span>
                     <Button className="search-btn" style={{ padding: "16px 12px", borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}>Search</Button>
-                    <Button variant={Variant.CONTAINED} style={{ marginLeft: "16px", padding: "16px 12px" }}>Create User</Button>
+                    <Button onClick={() => setDialogOpen(true)} variant={Variant.CONTAINED} style={{ marginLeft: "16px", padding: "16px 12px" }}>Create User</Button>
                 </div>
             </Card>
             <Card style={{ width: "100%", marginTop: "8px" }}>
@@ -37,7 +41,7 @@ const UserSearcb = () => {
                 ) : (
                     <Table values={users} sortDirection={sort[0] === "-" ? -1 : 1} sortCol={sort.substring(1)} setSort={(col, dir) => setSort(`${dir === -1 ? "-" : "+"}${col}`)}>
                         <Col key="name" title="Name" sortable />
-                        <Col key="email" title="Email" sortable/>
+                        <Col key="email" title="Email" sortable />
                         <Col key="createdAt" title="Date Created" sortable formatter={(val: User) => new Date(val.createdAt).toLocaleDateString("en-US", {
                             day: "2-digit",
                             month: "2-digit",
@@ -48,9 +52,11 @@ const UserSearcb = () => {
                             month: "2-digit",
                             year: "numeric",
                         })} />
+                        <Col key="actions" title="" formatter={() => <IconButton icon={faUser} />} />
                     </Table>
                 )}
             </Card>
+            <CreateUserDialog open={dialogOpen} setOpen={setDialogOpen} />
         </>
     );
 };

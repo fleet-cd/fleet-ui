@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const http = axios.create({
     withCredentials: true
@@ -9,9 +9,9 @@ http.interceptors.response.use(response => {
     return response;
 }, error => {
     if (error.response.status === 401) {
-        if (error.response.data.errorName === 'InvalidToken:UNAUTHORIZED') {
-            window.location.pathname = '/login';
+        if (error.response.data.errorName === "InvalidToken:UNAUTHORIZED") {
+            window.location.pathname = "/login";
         }
     }
-    return error;
+    return Promise.reject(error);
 });
