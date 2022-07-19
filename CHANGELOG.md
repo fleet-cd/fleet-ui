@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/fleet-cd/fleet-ui/compare/v0.5.0...v0.6.0) (2022-07-19)
+
+
+### Features
+
+* add new pages ([98ec26d](https://github.com/fleet-cd/fleet-ui/commit/98ec26dcceb4fc7adc3c86c65e903daf92484b8b))
+
 ## [0.5.0](https://github.com/fleet-cd/fleet-ui/compare/v0.4.0...v0.5.0) (2022-07-17)
 
 
