@@ -11,6 +11,9 @@ $accent-color-2: #634DBF;
 $danger-1: #CD4246;
 $danger-2: #E76A6E;
 
+$blue-1: #2D72D2;
+$blue-2: #4C90F0;
+
 $font-size: 16px;
 
 $spacing: 4px;
@@ -21,31 +24,39 @@ $padding: $spacing * 4;
 
 $fast-transition: 125ms;
 
-$primary-intent-config: (
+$primary-color-config: (
     primary: $accent-color-1,
     secondary: $accent-color-2,
     textColor: $text-color,
     secondaryTextColor: $text-color,
 );
 
-$danger-intent-config: (
+$danger-color-config: (
     primary: $danger-1,
     secondary: $danger-2,
     textColor: $text-color,
     secondaryTextColor: $text-color,
 );
 
-$white-intent-config: (
+$white-color-config: (
     primary: $text-color,
     secondary: $text-color,
     textColor: $text-color,
     secondaryTextColor: $text-color,
 );
 
-$intents: (
-    primary: $primary-intent-config,
-    danger: $danger-intent-config,
-    white: $white-intent-config,
+$blue-color-config: (
+    primary: $blue-1,
+    secondary: $blue-2,
+    textColor: $text-color,
+    secondaryTextColor: $text-color,
+);
+
+$colors: (
+    primary: $primary-color-config,
+    danger: $danger-color-config,
+    white: $white-color-config,
+    blue: $blue-color-config,
 );
 
 

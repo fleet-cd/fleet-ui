@@ -3,13 +3,15 @@ import { InputText } from "../../components/Input/InputText";
 import { Dialog } from "../../components/Dialog/Dialog";
 import { Label } from "../../components/Label/Label";
 import Button from "../../components/Button/Button";
-import { Intent, Variant } from "../../components/types/types";
+import { Color, Variant } from "../../components/types/types";
 import UserService from "../../services/user.service";
 import { useSnackbar } from "notistack";
+import { useRouter } from "next/router";
 
 
 const CreateUserDialog = (props: { open: boolean, setOpen: (b: boolean) => void }) => {
     const { enqueueSnackbar } = useSnackbar();
+    const router = useRouter();
     const [name, setName] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -43,7 +45,10 @@ const CreateUserDialog = (props: { open: boolean, setOpen: (b: boolean) => void 
             email,
             password
         })
-            .then(() => enqueueSnackbar("User created!", { variant: "success" }))
+            .then((r) => {
+                enqueueSnackbar("User created!", { variant: "success" })
+                router.push(`/resources/users/${r.data.frn}`)
+            })
             .catch(() => enqueueSnackbar("User creation failed. Please try again.", { variant: "error" }))
             .finally(() => props.setOpen(false))
     }
@@ -67,7 +72,7 @@ const CreateUserDialog = (props: { open: boolean, setOpen: (b: boolean) => void 
                     </Label>
                 </div>
                 <Button style={{ marginTop: "16px" }} fill onClick={submit}>Save</Button>
-                <Button onClick={() => props.setOpen(false)} variant={Variant.CONTAINED} intent={Intent.DANGER} style={{ marginTop: "16px" }} fill>Cancel</Button>
+                <Button onClick={() => props.setOpen(false)} variant={Variant.CONTAINED} color={Color.DANGER} style={{ marginTop: "16px" }} fill>Cancel</Button>
             </Dialog>
         </>
     );

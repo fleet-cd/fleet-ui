@@ -18,7 +18,7 @@
     cursor: pointer;
 }
 
-@each $name, $config in variables.$intents {
+@each $name, $config in variables.$colors {
     @debug map.get($config, "primary");
     .button.#{$name} {
         @extend .base-button;

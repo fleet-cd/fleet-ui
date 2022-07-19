@@ -16,6 +16,8 @@ const Ship: NextPage = () => {
     const router = useRouter();
     const [name, setName] = useState<string>("")
     const [namespace, setNamespace] = useState<Namespace>(DEFAULT_NAMESPACE)
+    const [repoOwner, setRepoOwner] = useState<string>("")
+    const [repo, setRepo] = useState<string>("")
 
     const [nameError, setNameError] = useState<string | undefined>()
 
@@ -28,6 +30,14 @@ const Ship: NextPage = () => {
                     </Label>
                     <Label label="Namespace" style={{ flexGrow: 1 }} >
                         <NamespaceSelect fill selected={namespace} setSelected={setNamespace} />
+                    </Label>
+                </div>
+                <div style={{ width: "100%", display: "flex", alignItems: "flex-start", gap: "16px", margin: "16px 0" }}>
+                    <Label label="Repo Owner" style={{ flexGrow: 1 }}>
+                        <InputText fill placeholder="Repo Owner" onChange={(e) => setRepoOwner(e.target.value)} value={repoOwner || ""} required />
+                    </Label>
+                    <Label label="Repo" style={{ flexGrow: 1 }} >
+                        <InputText fill placeholder="Repo" onChange={(e) => setRepo(e.target.value)} value={repo || ""} required />
                     </Label>
                 </div>
                 <Button onClick={() => {
@@ -43,7 +53,11 @@ const Ship: NextPage = () => {
                     ShipService.createShip({
                         name: name,
                         namespace: namespace.name,
-                        tags: []
+                        tags: [],
+                        source: {
+                            repo,
+                            owner: repoOwner
+                        }
                     })
                         .then(r => {
                             enqueueSnackbar("Successfully created ship.", { variant: "success" })

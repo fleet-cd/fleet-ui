@@ -5,6 +5,7 @@ import styles from "./Dropdown.module.scss"
 import Card from "../Cards/Card/Card"
 import { InputText, InputTextProps } from "../Input/InputText"
 import { MenuItem } from "../MenuItem/MenuItem"
+import useMeasure from "react-use-measure"
 
 interface DropdownProps<T> extends InputTextProps {
     items?: T[]
@@ -31,10 +32,11 @@ export function Dropdown<T>(properties: DropdownProps<T>) {
     }, [selected])
     const sel2 = selected != null ? stringRenderer(selected) : "Select"
     // const actualItems = items != null ? items : []
-
+    const [ref, bounds] = useMeasure()
     return (
         <div className={props.fill ? styles.fill : ""}>
             <InputText
+                ref={ref}
                 readOnly
                 style={{ cursor: "pointer" }}
                 {...props}
@@ -46,7 +48,7 @@ export function Dropdown<T>(properties: DropdownProps<T>) {
                     item && (
                         <animated.div style={st} className={styles.options}>
                             <Card style={{ padding: 0 }}>
-                                <div className={styles.optionsContainer}>
+                                <div style={{ width: bounds.width }} className={styles.optionsContainer}>
                                     {items != null && items.length !== 0 ? (
                                         items.map((i, idx) => renderer(i, idx))
                                     ) : (

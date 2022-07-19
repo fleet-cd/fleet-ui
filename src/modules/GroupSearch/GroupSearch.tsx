@@ -51,7 +51,7 @@ const GroupSearch = () => {
                             month: "2-digit",
                             year: "numeric",
                         })} />
-                        <Col key="actions" title="" formatter={(v: Group) => <IconButton onClick={() => router.push(`/resources/groups/${v.name}`)} icon={faUserGroup} />} />
+                        <Col align="right" key="actions" title="" formatter={(v: Group) => <IconButton onClick={() => router.push(`/resources/groups/${v.name}`)} icon={faUserGroup} />} />
                     </Table>
                 )}
             </Card>

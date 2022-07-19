@@ -12,14 +12,12 @@ const Group = () => {
     const router = useRouter();
     const { groupName } = router.query;
     const [group, setGroup] = React.useState<Group | undefined>();
-    const [permissions, setPermissions] = React.useState<Permission[] | undefined>();
     const { enqueueSnackbar } = useSnackbar();
 
     const pull = useCallback(() => {
         if (groupName) {
-            AuthService.getGroup(groupName.toString(), true).then(r => {
-                setGroup(r.data.group);
-                setPermissions(r.data.expandedPermissions);
+            AuthService.getGroup(groupName.toString()).then(r => {
+                setGroup(r.data);
             });
         }
     }, [groupName])
@@ -28,11 +26,11 @@ const Group = () => {
         pull()
     }, [pull]);
 
-    const removePerm = (p: Permission) => {
+    const removePerm = (perm: Permission, idx: number) => {
         if (!group) {
             return
         }
-        AuthService.removePermissionFromGroup(group.name, p.frn)
+        AuthService.removePermissionFromGroup(group.name, idx)
             .then(() => enqueueSnackbar("Permission removed!", { variant: "success" }))
             .catch(() => enqueueSnackbar("Permission removal failed. Please try again.", { variant: "error" }))
             .finally(pull)
@@ -45,7 +43,7 @@ const Group = () => {
             createdAt={group?.createdAt}
         />
         <Card title="Permissions" style={{ marginTop: "8px" }}>
-            <PermissionsTable perms={permissions} onDelete={removePerm} />
+            <PermissionsTable pull={pull} groupName={groupName ? groupName.toString() : ""} perms={group?.permissions} onDelete={removePerm} />
         </Card>
     </div>;
 };

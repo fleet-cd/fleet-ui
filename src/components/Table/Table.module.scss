@@ -46,12 +46,15 @@ $tablePadding: variables.$spacing * 3.5 variables.$spacing * 4;
 
 .right {
     justify-content: right;
+    text-align: right;
 }
 
 .left {
     justify-content: left;
+    text-align: left;
 }
 
 .center {
     justify-content: center;
+    text-align: center;
 }

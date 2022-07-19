@@ -3,7 +3,7 @@ import { InputText } from "../../components/Input/InputText";
 import { Dialog } from "../../components/Dialog/Dialog";
 import { Label } from "../../components/Label/Label";
 import Button from "../../components/Button/Button";
-import { Intent, Variant } from "../../components/types/types";
+import { Color, Variant } from "../../components/types/types";
 import { useSnackbar } from "notistack";
 import OtherService from "../../services/other.service";
 
@@ -46,7 +46,7 @@ const CreateNamespaceDialog = (props: { open: boolean, setOpen: (b: boolean) => 
                     </Label>
                 </div>
                 <Button style={{ marginTop: "16px" }} fill onClick={submit}>Save</Button>
-                <Button onClick={() => props.setOpen(false)} variant={Variant.CONTAINED} intent={Intent.DANGER} style={{ marginTop: "16px" }} fill>Cancel</Button>
+                <Button onClick={() => props.setOpen(false)} variant={Variant.CONTAINED} color={Color.DANGER} style={{ marginTop: "16px" }} fill>Cancel</Button>
             </Dialog>
         </>
     );

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Dialog } from "../../components/Dialog/Dialog";
 import { Label } from "../../components/Label/Label";
 import Button from "../../components/Button/Button";
-import { Intent, Variant } from "../../components/types/types";
+import { Color, Variant } from "../../components/types/types";
 import { useSnackbar } from "notistack";
 import { Group } from "../../models/auth.model";
 import AuthService from "../../services/auth.service";
@@ -39,7 +39,7 @@ const AddGroupDialog = (props: { open: boolean, setOpen: (b: boolean) => void, c
                     </Label>
                 </div>
                 <Button style={{ marginTop: "16px" }} fill onClick={() => props.confirm(group)}>Save</Button>
-                <Button onClick={() => props.setOpen(false)} variant={Variant.CONTAINED} intent={Intent.DANGER} style={{ marginTop: "16px" }} fill>Cancel</Button>
+                <Button onClick={() => props.setOpen(false)} variant={Variant.CONTAINED} color={Color.DANGER} style={{ marginTop: "16px" }} fill>Cancel</Button>
             </Dialog>
         </>
     );

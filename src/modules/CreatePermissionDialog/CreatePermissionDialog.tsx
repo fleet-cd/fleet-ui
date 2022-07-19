@@ -1,25 +1,19 @@
 import { useState } from "react";
-import { InputText } from "../../components/Input/InputText";
 import { Dialog } from "../../components/Dialog/Dialog";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
 import { MenuItem } from "../../components/MenuItem/MenuItem";
 import { Label } from "../../components/Label/Label";
 import Button from "../../components/Button/Button";
-import { Intent, Variant } from "../../components/types/types";
-import AuthService from "../../services/auth.service";
-import { useSnackbar } from "notistack";
+import { Color, Variant } from "../../components/types/types";
 import NamespaceSelect from "../NamespaceSelect/NamespaceSelect";
 import { Namespace } from "../../models/namespace.model";
+import { CreatePermissionRequest } from "../../models/auth.model";
 
 
-const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) => void }) => {
-    const { enqueueSnackbar } = useSnackbar()
+const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) => void, submit: (p: CreatePermissionRequest) => void }) => {
     const [actions, setActions] = useState(["VIEW"])
-    const [resource, setResource] = useState("ALL")
+    const [resource, setResource] = useState("*")
     const [namespace, setNamespace] = useState<Namespace>({ name: "*", createdAt: "", modifiedAt: "" })
-    const [name, setName] = useState<string>("")
-
-    const [nameError, setNameError] = useState<string | undefined>()
 
     const setInnerAction = (idx: number, value: string) => {
         const copy = [...actions]
@@ -33,49 +27,20 @@ const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) =>
         setActions(copy)
     }
 
-    const submit = async () => {
-        let hasError = false
-        if (!name.match(/^[a-z0-9\\-]+$/)) {
-            setNameError("Name must be alphanumeric characters and dashes")
-            hasError = true
-        }
-        if (hasError) {
-            return
-        }
-        setNameError(undefined)
-        AuthService.createPermission({
-            name,
-            namespace: namespace.name,
-            actions: actions.map(a => a.toLowerCase()),
-            resourceType: resource.toLowerCase() === "all" ? "*" : resource.toLowerCase()
-        })
-            .then(() => {
-                props.setOpen(false)
-                enqueueSnackbar("Permission created!", { variant: "success" })
-            })
-            .catch(() => {
-                props.setOpen(false)
-                enqueueSnackbar("Could not create permission.", { variant: "error" })
-            })
-    }
-
     return (
         <>
             <Dialog open={props.open} setOpen={props.setOpen} title="Create Permission" width={400}>
                 <div style={{ marginBottom: "16px", display: "flex", alignItems: "flex-start", gap: "16px" }}>
-                    <Label label="Permission Name">
-                        <InputText value={name} onChange={(e) => setName(e.target.value)} error={nameError} fill placeholder="Name" />
-                    </Label>
-                    <Label label="Resource">
+                    <Label label="Resource" style={{ width: "100%" }}>
                         <Dropdown
+                            fill
                             items={[
-                                "ALL",
-                                "SHIP",
-                                "PRODUCT",
-                                "CARGO",
-                                "USER",
-                                "GROUP",
-                                "PERMISSION"
+                                "*",
+                                "ship",
+                                "product",
+                                "cargo",
+                                "user",
+                                "group",
                             ]}
                             selected={resource}
                             renderer={(item) => <MenuItem onClick={() => setResource(item)}>{item}</MenuItem>}
@@ -91,7 +56,7 @@ const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) =>
                 <div style={{ marginBottom: "16px" }}>
                     <Label label="Actions">
                         <Dropdown
-                            items={["ALL", "VIEW", "EDIT", "CREATE", "DELETE"]}
+                            items={["*", "view", "edit", "create", "delete"]}
                             selected={actions[0]}
                             renderer={(item) => <MenuItem onClick={() => setInnerAction(0, item)}>{item}</MenuItem>}
                             stringRenderer={(item) => item}
@@ -104,7 +69,7 @@ const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) =>
                         return <div key={idx} style={{ marginTop: "16px", display: "flex", alignItems: "center", width: "100%", gap: "8px" }}>
                             <Dropdown
                                 fill
-                                items={["ALL", "VIEW", "EDIT", "CREATE", "DELETE"]}
+                                items={["*", "view", "edit", "create", "delete"]}
                                 selected={i}
                                 renderer={(item) => <MenuItem onClick={() => setInnerAction(idx, item)}>{item}</MenuItem>}
                                 stringRenderer={(item) => item}
@@ -113,8 +78,12 @@ const CreatePermissionDialog = (props: { open: boolean, setOpen: (b: boolean) =>
                         </div>
                     })}
                     <Button disabled={actions.length === 4} variant={Variant.CONTAINED} onClick={() => setActions([...actions, "VIEW"])} style={{ marginTop: "16px" }} fill>Add</Button>
-                    <Button style={{ marginTop: "16px" }} fill onClick={submit}>Save</Button>
-                    <Button onClick={() => props.setOpen(false)} variant={Variant.CONTAINED} intent={Intent.DANGER} style={{ marginTop: "16px" }} fill>Cancel</Button>
+                    <Button style={{ marginTop: "16px" }} fill onClick={() => props.submit({
+                        namespace: namespace.name,
+                        actions: actions,
+                        resourceType: resource,
+                    })}>Save</Button>
+                    <Button onClick={() => props.setOpen(false)} variant={Variant.CONTAINED} color={Color.DANGER} style={{ marginTop: "16px" }} fill>Cancel</Button>
                 </div>
             </Dialog>
         </>

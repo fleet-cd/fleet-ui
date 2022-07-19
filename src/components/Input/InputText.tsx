@@ -1,27 +1,29 @@
 /* eslint-disable prefer-const */
-import { InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 import { getClassName } from "../../utils/classnames";
-import { Intent, Variant } from "../types/types";
+import { Color, Variant } from "../types/types";
 import styles from "./InputText.module.scss";
 
 export interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
     variant?: Variant,
-    intent?: Intent,
+    Color?: Color,
     fill?: boolean
     error?: string
 }
 
-export function InputText(props: InputTextProps) {
+// eslint-disable-next-line react/display-name
+export const InputText = React.forwardRef((props: InputTextProps, ref: React.LegacyRef<HTMLInputElement>) => {
     let {
         fill,
+        color,
         onChange,
         ...rest
     } = props
     const classes = [styles.inputText];
-    if (props.intent != null && props.intent !== Intent.PRIMARY) {
-        classes.push(styles[props.intent]);
+    if (color != null && color !== Color.PRIMARY) {
+        classes.push(styles[color]);
     } else {
-        classes.push(styles[Intent.PRIMARY]);
+        classes.push(styles[Color.PRIMARY]);
     }
     if (props.variant != null && props.variant !== Variant.STANDARD) {
         classes.push(styles[props.variant]);
@@ -32,7 +34,7 @@ export function InputText(props: InputTextProps) {
     const className = getClassName(props.className, [...classes]);
 
 
-    return <div className={`${styles.inputGroup} ${fill ? styles.fill : ""}`}>
+    return <div className={`${styles.inputGroup} ${fill ? styles.fill : ""}`} ref={ref}>
         <input {...rest}
             onChange={onChange}
             className={className}>
@@ -42,4 +44,4 @@ export function InputText(props: InputTextProps) {
             {props.error}
         </div>
     </div>
-}
+})

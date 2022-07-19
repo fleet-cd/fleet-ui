@@ -27,7 +27,7 @@
     width: 100%
 }
 
-@each $name, $config in variables.$intents {
+@each $name, $config in variables.$colors {
     .inputText.#{$name} {
         @extend .baseInputText;
     }

@@ -1,7 +1,8 @@
-export enum Intent {
+export enum Color {
     PRIMARY = "primary",
     DANGER = "danger",
-    WHITE = "white"
+    WHITE = "white",
+    BLUE = "blue"
 }
 
 export enum Variant {

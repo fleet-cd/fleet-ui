@@ -10,13 +10,13 @@ import "primereact/resources/primereact.min.css";                  //core css
 // import 'primeicons/primeicons.css';                                //icons
 
 import { setConfiguration } from "react-grid-system";
-import { Intent, Variant } from "../components/types/types";
+import { Color, Variant } from "../components/types/types";
 
 setConfiguration({ maxScreenClass: "xl" });
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <SnackbarProvider maxSnack={3} action={(snackbarId) => (
-    <Button intent={Intent.WHITE} variant={Variant.TEXT} onClick={() => closeSnackbar(snackbarId)}>
+    <Button color={Color.WHITE} variant={Variant.TEXT} onClick={() => closeSnackbar(snackbarId)}>
       Dismiss
     </Button>
   )}>

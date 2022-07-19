@@ -1,17 +1,18 @@
 import React, { ButtonHTMLAttributes } from "react";
 import { getClassName } from "../../utils/classnames";
-import { Intent, Variant } from "../types/types";
+import { Color, Variant } from "../types/types";
 import styles from "./Button.module.scss";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> { 
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: Variant
-    intent?: Intent
+    color?: Color
     fill?: boolean
-} 
+}
 
 const Button = (props: ButtonProps) => {
     const {
         fill,
+        color,
         ...rest
     } = props
     const classes = [styles.button];
@@ -21,10 +22,10 @@ const Button = (props: ButtonProps) => {
     if (rest.variant != null && rest.variant !== Variant.STANDARD) {
         classes.push(styles[rest.variant]);
     }
-    if (rest.intent != null && rest.intent !== Intent.PRIMARY) {
-        classes.push(styles[rest.intent]);
+    if (color != null && color !== Color.PRIMARY) {
+        classes.push(styles[color]);
     } else {
-        classes.push(styles[Intent.PRIMARY]);
+        classes.push(styles[Color.PRIMARY]);
     }
     const className = getClassName(rest.className, [...classes]);
     return (

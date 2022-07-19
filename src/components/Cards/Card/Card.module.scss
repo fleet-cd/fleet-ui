@@ -20,3 +20,15 @@
     font-size: variables.$font-size * 1.1;
     margin-bottom: variables.$spacing * 2;
 }
+
+.small .card-title {
+    font-size: variables.$font-size * 1.25;
+    font-weight: 600;
+    margin-bottom: variables.$spacing * 2;
+}
+
+.small .card-subtitle {
+    font-size: variables.$font-size * 1;
+    font-weight: 400;
+    margin-bottom: variables.$spacing * 2;
+}

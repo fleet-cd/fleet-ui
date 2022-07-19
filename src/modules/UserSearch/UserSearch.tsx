@@ -54,7 +54,7 @@ const UserSearch = () => {
                             month: "2-digit",
                             year: "numeric",
                         })} />
-                        <Col key="actions" title="" formatter={(u: User) => <IconButton icon={faUser} onClick={() => router.push(`/resources/users/${u.frn}`)} />} />
+                        <Col align="right" key="actions" title="" formatter={(u: User) => <IconButton icon={faUser} onClick={() => router.push(`/resources/users/${u.frn}`)} />} />
                     </Table>
                 )}
             </Card>

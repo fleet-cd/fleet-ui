@@ -5,7 +5,7 @@ import Sidebar from '../Controls/Sidebar';
 
 function Page(props: { children: ReactNode }) {
     const router = useRouter();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     if (router.pathname.includes('/login')) {
         return <>{props.children}</>;
     }

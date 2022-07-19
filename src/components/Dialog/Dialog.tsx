@@ -10,19 +10,20 @@ interface DialogProps {
     children: React.ReactNode
     footer?: React.ReactNode
     width?: number
+    height?: number
 }
 
 export function Dialog(props: DialogProps) {
     useEffect(() => {
         const close = (e) => {
-          if(e.keyCode === 27){
-            props.setOpen(false)
-          }
+            if (e.keyCode === 27) {
+                props.setOpen(false)
+            }
         }
         window.addEventListener("keydown", close)
-      return () => window.removeEventListener("keydown", close)
-    },[])
-  
+        return () => window.removeEventListener("keydown", close)
+    }, [])
+
     const transitions = useTransition(props.open, {
         from: { opacity: 0 },
         enter: { opacity: 1 },
@@ -32,10 +33,10 @@ export function Dialog(props: DialogProps) {
     });
 
     return transitions(
-        (st, item) => item && <animated.div style={{...st}} className={styles.dialogWrapper} onClick={() => props.setOpen(false)}>
+        (st, item) => item && <animated.div style={{ ...st }} className={styles.dialogWrapper} onClick={() => props.setOpen(false)}>
             <div className={styles.dialog}>
                 <div className={styles.dialogContent}>
-                    <Card style={{width: props.width ? `${props.width}px` : ""}} onClick={(e) => e.stopPropagation()}>
+                    <Card style={{ width: props.width ? `${props.width}px` : "", height: props.height ? `${props.height}px` : "" }} onClick={(e) => e.stopPropagation()}>
                         <div className={styles.dialogTitle}>
                             {props.title}
                         </div>

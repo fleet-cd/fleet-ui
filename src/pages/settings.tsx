@@ -4,8 +4,8 @@ import Tabs from "../components/Tabs/Tabs";
 import Tab from "../components/Tabs/Tab";
 import UserSearcb from "../modules/UserSearch/UserSearch";
 import GroupSearch from "../modules/GroupSearch/GroupSearch";
-import PermissionSearch from "../modules/PermissionSearch/PermissionSearch";
 import NamespaceSearch from "../modules/NamespaceSearch/NamespaceSearch";
+import EnvironmentSearch from "../modules/EnvironmentSearch/EnvironmentSearch";
 
 const Settings: NextPage = () => {
     return (
@@ -15,7 +15,7 @@ const Settings: NextPage = () => {
                 <Tab key="namespaces" name="Namespaces"><NamespaceSearch /></Tab>
                 <Tab key="users" name="Users"><UserSearcb /></Tab>
                 <Tab key="groups" name="Groups"><GroupSearch /></Tab>
-                <Tab key="permissions" name="Permissions"><PermissionSearch /></Tab>
+                <Tab key="envs" name="Environments"><EnvironmentSearch /></Tab>
             </Tabs>
         </Card>
     );

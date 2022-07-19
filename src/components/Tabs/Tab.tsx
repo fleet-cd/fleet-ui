@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Tab(props: { name: string, key: string, children: React.ReactNode }) {
+export default function Tab(props: { name: string, key: string, children?: React.ReactNode }) {
     return {
         props: props,
         type: "__esModule",

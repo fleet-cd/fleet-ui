@@ -8,7 +8,7 @@ export interface User extends FleetResource {
 
 export interface Group {
     name: string,
-    permissions: string[]
+    permissions: Permission[]
     modifiedAt: string
     createdAt: string
 }
@@ -19,7 +19,6 @@ export interface GetGroupResponse {
 }
 
 export interface CreatePermissionRequest {
-    name: string
     namespace: string
     resourceType: string
     actions: string[]
@@ -27,7 +26,7 @@ export interface CreatePermissionRequest {
 
 export interface CreateGroupRequest {
     name: string
-    permissions: string[]
+    permissions: CreatePermissionRequest[]
 }
 
 export interface CreateUserRequest {
@@ -37,8 +36,6 @@ export interface CreateUserRequest {
 }
 
 export interface Permission {
-    frn: string
-    name: string
     namespace: string
     resourceType: string
     actions: string[]
